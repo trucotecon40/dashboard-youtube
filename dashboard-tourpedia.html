@@ -94,12 +94,8 @@
           </div>
           <div class="chart_container" style="right: 0; float: right">
             <google-chart
-              query="{{query}}"
-              index="tourpedia"
-              subindex="places"
+              datos="{{data}}"
               field="location"
-              fields='["category", "location"]'
-              host='{{endpoint}}'
               id='pie-chart4'
               extra-id='pie-chart4'
               type='pie'
@@ -115,12 +111,9 @@
         <div style="width: 100%">
           <div class="chart_container" style="left: 0; float: left">
            <google-chart
-              query="{{query}}"
-              index="tourpedia"
-              subindex="places"
               field="numReviews"
+              datos="{{data}}"
               fields='["category", "location"]'
-              host='{{endpoint}}'
               id='column-chart1'
               extra-id='column-chart1'
               type='column'
