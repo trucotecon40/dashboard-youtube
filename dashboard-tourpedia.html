@@ -111,9 +111,8 @@
         <div style="width: 100%">
           <div class="chart_container" style="left: 0; float: left">
            <google-chart
-              field="numReviews"
               datos="{{data}}"
-              fields='["category", "location"]'
+              field="numReviews"
               id='column-chart1'
               extra-id='column-chart1'
               type='column'
@@ -128,12 +127,9 @@
           </div>
           <div class="chart_container" style="right: 0; float: right">
             <google-chart
-              query="{{query}}"
-              index="tourpedia"
-              subindex="places"
+              datos="{{data}}"
               field="polarity"
               fields='["category", "location"]'
-              host='{{endpoint}}'
               id='bar-chart3'
               extra-id='bar-chart3'
               type='bar'
@@ -151,11 +147,7 @@
         <div style="width: 100%">
           <div class="chart_container" style="left: 0; float: left">
             <reviews-table 
-                index="tourpedia"
-                subindex="places"
-                query="{{query}}"
-                filters="{{filters}}"
-                fields='["category", "location"]'
+                data="{{ids}}"
                 icon='social:people'>
             </reviews-table>
           </div>
@@ -192,8 +184,9 @@
         }, 
 
         ids:{
-          type: Array,
-          value: ["481","482","32512","32420","91963","96677","160677","131425","322429","322612"]
+          type: Array
+          /*value: ["481","482","32512","32420","91963","96677","160677","131425","322429","322612"]*/
+           
         },
 
         data:{
@@ -233,6 +226,7 @@
       
       addPlace: function(event) {
         this.set('places', this.places.concat(event.detail.response))
+        console.log(this.places)
       },
       
       getName: function(id) {
@@ -283,11 +277,31 @@
                     _count: "desc"
                   }
                 }
+              },
+              numReviews: {
+                terms: {
+                  field: "numReviews",
+                  order: {
+                    _count: "desc"
+                  }
+                }
+              },
+              polarity: {
+                terms: {
+                  field: "polarity",
+                  order: {
+                    _count: "desc"
+                  }
+                }
               }
             }      
           }
           }).then(function (resp) {
+            var myids = []
+            resp.hits.hits.forEach(function(entry){myids.push(entry._id)})
+            that.ids = myids;
             that.data = resp;
+            
         });
         
       },
@@ -306,6 +320,7 @@
             query: {
               match_all: {}
             },
+            sort: {numReviews: "desc"},
             aggs: {
               category: {
                 terms: {
@@ -322,17 +337,37 @@
                     _count: "desc"
                   }
                 }
+              },
+              numReviews: {
+                terms: {
+                  field: "numReviews",
+                  order: {
+                    _count: "desc"
+                  }
+                }
+              },
+              polarity: {
+                terms: {
+                  field: "polarity",
+                  order: {
+                    _count: "desc"
+                  }
+                }
               }
             }      
           }
         }).then(function (resp) {
+          var myids = []
+          resp.hits.hits.forEach(function(entry){myids.push(entry._id)})
+          that.ids = myids;
+          //console.log(that.ids)
           that.data = resp;
-          console.log(that.data)
+          //console.log(that.data)
         });
       },
 
       _filtersChange: function() {
-        console.log("_filtersChange")
+        console.log("_filtersChangedash")
         var that = this;
         if(filtered){
           var client = new $.es.Client({
@@ -365,11 +400,33 @@
                     _count: "desc"
                   }
                 }
+              },
+              numReviews: {
+                terms: {
+                  field: "numReviews",
+                  order: {
+                    _count: "desc"
+                  }
+                }
+              },
+              polarity: {
+                terms: {
+                  field: "polarity",
+                  order: {
+                    _count: "desc"
+                  }
+                }
               }
             }      
           }
           }).then(function (resp) {
+            var myids = []
+            resp.hits.hits.forEach(function(entry){myids.push(entry._id)})
+            that.ids = myids;
+            //console.log(that.ids)
             that.data = resp;
+            //console.log(that.data)
+            
             });
         }
       }
