@@ -7,7 +7,7 @@ This web component accepts the following parameters:
 ```html
 
 <dashboard-tourpedia
-    client="<!-- elasticsearch client -->"
+    client="<!-- elasticsearch client -->">
 </dashboard-tourpedia>
 
 ```
