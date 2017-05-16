@@ -1,0 +1,57 @@
+<html>
+  <head>
+
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="imports.html"></link>
+  </head>
+  
+  <body>
+    <template is="dom-bind">
+
+    <elastic-client 
+      config='{"host": "http://localhost:9200"}' 
+      client="{{client}}"
+      cluster-status="{{myStatus}}">
+    </elastic-client>
+
+    <dashboard-tourpedia
+      client="{{client}}"></dashboard-tourpedia>
+    <!-- <button id="databutton" onclick="changedata()">Click to change data</button> -->
+    <script>
+      var datas =[
+        {"hits": {
+                "total": 20000
+            },
+            "aggregations": {
+                "category": {
+                    "buckets": [
+                        {"key": "myObject", "doc_count": 3000},
+                        {"key": "otherObject", "doc_count": 1000}
+                    ]
+                }
+            }
+        },
+        {"hits": {
+                "total": 30000
+            },
+            "aggregations": {
+                "category": {
+                    "buckets": [
+                        {"key": "myObject", "doc_count": 1000},
+                        {"key": "otherObject", "doc_count": 4000}
+                    ]
+                }
+            }
+        }];
+      var numdata = 0;
+      <!-- var nc1 = document.getElementById('demo-chart1'); -->
+      <!-- var nc2 = document.getElementById('demo-chart2'); -->
+      <!-- nc1.data = nc2.data = datas[0]; -->
+      <!-- function changedata(){ -->
+      <!--   numdata += 1; -->
+      <!-- nc1.data = nc2.data = datas[numdata%2]; -->
+      <!-- } -->
+    </script>
+    </template>
+  </body>
+</html>

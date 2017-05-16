@@ -1,12 +1,11 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/material-search/material-search.html">
-<link rel="import" href="../../bower_components/paper-material/paper-material.html">
-<link rel="import" href="../../bower_components/google-chart-elk/google-chart.html">
-<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
-<link rel="import" href="../../bower_components/yasgui/yasgui.html">
-<link rel="import" href="../../bower_components/reviews-table/reviews-table.html">
-<link rel="import" href="../../bower_components/number-chart/number-chart.html">
-<link rel="import" href="../../bower_components/leaflet-map/leaflet-map.html">
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../material-search/material-search.html">
+<link rel="import" href="../paper-material/paper-material.html">
+<link rel="import" href="../google-chart-elasticsearch/google-chart.html">
+<link rel="import" href="../paper-tabs/paper-tabs.html">
+<link rel="import" href="../reviews-table/reviews-table.html">
+<link rel="import" href="../number-chart/number-chart.html">
+
 
 <dom-module id="dashboard-tourpedia">
 
@@ -76,25 +75,42 @@
             </number-chart>
           </div>
         </div>
+        <!-- <div style="width: 100%; display: inline-block"> -->
+        <!--   <div style="width: 23%; margin-right: 2.6%; float: left"> -->
+        <!--     <number-chart  -->
+        <!--       data="{{data}}" -->
+        <!--       object="londres" -->
+        <!--       title="Londres" -->
+        <!--       icon="maps:local-dining" -->
+        <!--       aggkey="location" -->
+        <!--       stylebg="bg-yellow"> -->
+        <!--     </number-chart> -->
+        <!--   </div> -->
+        <!--   <div style="width: 23%; margin-right: 2.6%; float: left"> -->
+        <!--     <number-chart  -->
+        <!--       data="{{data}}" -->
+        <!--       object="madrid" -->
+        <!--       aggkey="location" -->
+        <!--       title="Madrid" -->
+        <!--       icon="social:whatshot" -->
+        <!--       stylebg="bg-green"> -->
+        <!--     </number-chart> -->
+        <!--   </div> -->
+        <!--   <div style="width: 23%; float: left"> -->
+        <!--     <number-chart  -->
+        <!--       icon="maps:hotel" -->
+        <!--       data="{{data}}" -->
+        <!--       title="Paris" -->
+        <!--       object="paris" -->
+        <!--       aggkey="location" -->
+        <!--       stylebg="bg-aqua"> -->
+        <!--     </number-chart> -->
+        <!--   </div> -->
+        <!-- </div> -->
         <div style="width: 100%; display: inline-block">
-          <div class="chart_container" style="left: 0; float: left">
-            <google-chart
-              field="category"
-              datos="{{data}}"             
-              id='pie-chart3'
-              extra-id='pie-chart3'
-              type='pie'
-              filters="{{filters}}"
-              icon='room'
-              param="{{param}}"
-              options='{"title": "Different types of places"}'
-              cols='[{"label": "Sentiment", "type": "string"},{"label": "Count", "type": "number"}]'
-              rows='[ ["Jan", 31],["Feb", 28],["Mar", 31],["Apr", 30],["May", 31],["Jun", 30] ]'>
-            </google-chart>
-          </div>
           <div class="chart_container" style="right: 0; float: right">
             <google-chart
-              datos="{{data}}"
+              data="{{data}}"
               field="location"
               id='pie-chart4'
               extra-id='pie-chart4'
@@ -104,77 +120,29 @@
               param='{{param}}'
               options='{"title": "Places at different cities"}'
               cols='[{"label": "Place", "type": "string"},{"label": "Count", "type": "number"}]'
-              rows='[ ["Jan", 31],["Feb", 28],["Mar", 31],["Apr", 30],["May", 31],["Jun", 30] ]'>
             </google-chart>
           </div>
-        </div>
-        <div style="width: 100%">
           <div class="chart_container" style="left: 0; float: left">
-           <google-chart
-              datos="{{data}}"
-              field="numReviews"
-              id='column-chart1'
-              extra-id='column-chart1'
-              type='column'
-              filters="{{filters}}"
-              icon='maps:rate-review'
-              param='{{param}}'
-              optionsbi='{"legend": "none"}'
-              options='{"title": "Count of number of reviews"}'
-              cols='[{"label": "Reviews", "type": "number"},{"label": "Count", "type": "number"}]'
-              rows='[ [0, 31],[1, 28],[2, 31],[3, 30],[4, 30],[5, 31],[6, 30] ]'>
-            </google-chart>
-          </div>
-          <div class="chart_container" style="right: 0; float: right">
             <google-chart
-              datos="{{data}}"
-              field="polarity"
-              fields='["category", "location"]'
-              id='bar-chart3'
-              extra-id='bar-chart3'
-              type='bar'
+              field="category"
+              data="{{data}}"             
+              id='pie-chart3'
+              extra-id='pie-chart3'
+              type='pie'
               filters="{{filters}}"
-              icon='maps:local-play'
-              param='{{param}}'
-              optionsbi='{"legend": "none"}'
-              options='{"title": "Count of different polarities"}'
-              cols='[{"label": "Polarity", "type": "number"},{"label": "Count", "type": "number"}]'
-              rows='[ ["Jan", 31],["Feb", 28],["Mar", 31],["Apr", 30],["May", 31],["Jun", 30] ]'>
+              icon='room'
+              param="{{param}}"
+              options='{"title": "Different types of places"}'
+              cols='[{"label": "Sentiment", "type": "string"},{"label": "Count", "type": "number"}]'
             </google-chart>
           </div>
-            <div style="clear: both"></div>
         </div>
-        <div style="width: 100%">
-          <div class="chart_container" style="left: 0; float: left">
-            <reviews-table 
-                data="{{ids}}"
-                icon='social:people'>
-            </reviews-table>
-          </div>
-          <div class="chart_container" style="right: 0; float: right"> 
-            <leaflet-map fit-to-markers>      
-              <template is="dom-repeat" items="[[getPoints(places.*)]]" as="place">      
-                <leaflet-marker latitude="{{place.lat}}" longitude="{{place.lng}}" title="{{place.name}}"> 
-                    <b>Name:</b>
-                    <span>{{place.name}}</span>
-                </leaflet-marker>
-              </template>
-            </leaflet-map>
-          </div>
-          <div style="clear: both"></div>
-        </div>
-      </div>
-      <div>
-        <yasgui-ui
-            endpoint="http://fuseki-tourpedia.cluster.gsi.dit.upm.es/tourpedia/query"
-            queries="{{queries}}">
-        </yasgui-ui>
       </div>
     </iron-pages>
   </template>
 
   <script>
-  var filtered = false;
+  var ready = false;
     Polymer({
       is: 'dashboard-tourpedia',
       properties: {
@@ -188,16 +156,14 @@
           /*value: ["481","482","32512","32420","91963","96677","160677","131425","322429","322612"]*/
            
         },
-
         data:{
           type: Object
         },
-
-        query: {
-          type: String,
-          observer: '_queryChanged'
+        client: {
+          type: Object,
+          notify: true,
+          observer: '_clientChanged'              
         },
-
         fields: {
           type: Array,
           value: function() { return []; }
@@ -221,7 +187,7 @@
       ],
 
       ready: function(){
-        this.queryDefault();
+        console.log("ready");
       },
       
       addPlace: function(event) {
@@ -237,143 +203,20 @@
         return f.base;
       },
 
-      _queryChanged: function() {
-        console.log("_queryChanged")
-        this.query ? this.queryChange(this.query) : this.queryDefault();
+      _clientChanged: function() {
+        console.log("ClientChanged");
+        ready = true;
+        this._query();
       },
-
-      queryChange: function(value) {
-        console.log("_filtersChange")
-        var that = this;
-        var client = new $.es.Client({
-            hosts: this.host
-          });
-          client.search({
-          // undocumented params are appended to the query string
-          index: "tourpedia",
-          type: "places",
-          body: {
-            size: 10,
-            query: {
-              multi_match: {
-                fields: ["category","location"],
-                query: this.query
-
-              }
-            },
-            aggs: {
-              category: {
-                terms: {
-                  field: "category",
-                  order: {
-                    _count: "desc"
-                  }
-                }
-              },
-              location: {
-                terms: {
-                  field: "location",
-                  order: {
-                    _count: "desc"
-                  }
-                }
-              },
-              numReviews: {
-                terms: {
-                  field: "numReviews",
-                  order: {
-                    _count: "desc"
-                  }
-                }
-              },
-              polarity: {
-                terms: {
-                  field: "polarity",
-                  order: {
-                    _count: "desc"
-                  }
-                }
-              }
-            }      
-          }
-          }).then(function (resp) {
-            var myids = []
-            resp.hits.hits.forEach(function(entry){myids.push(entry._id)})
-            that.ids = myids;
-            that.data = resp;
-            
-        });
-        
-      },
-     
-      queryDefault: function() {
-        var that = this;
-        var client = new $.es.Client({
-          hosts: this.host
-        });
-        client.search({
-          // undocumented params are appended to the query string
-          index: "tourpedia",
-          type: "places",
-          body: {
-            size: 10,
-            query: {
-              match_all: {}
-            },
-            sort: {numReviews: "desc"},
-            aggs: {
-              category: {
-                terms: {
-                  field: "category",
-                  order: {
-                    _count: "desc"
-                  }
-                }
-              },
-              location: {
-                terms: {
-                  field: "location",
-                  order: {
-                    _count: "desc"
-                  }
-                }
-              },
-              numReviews: {
-                terms: {
-                  field: "numReviews",
-                  order: {
-                    _count: "desc"
-                  }
-                }
-              },
-              polarity: {
-                terms: {
-                  field: "polarity",
-                  order: {
-                    _count: "desc"
-                  }
-                }
-              }
-            }      
-          }
-        }).then(function (resp) {
-          var myids = []
-          resp.hits.hits.forEach(function(entry){myids.push(entry._id)})
-          that.ids = myids;
-          //console.log(that.ids)
-          that.data = resp;
-          //console.log(that.data)
-        });
-      },
-
       _filtersChange: function() {
+        this._query();
+       },
+       _query: function() {
         console.log("_filtersChangedash")
         var that = this;
-        if(filtered){
-          var client = new $.es.Client({
-            hosts: this.host
-          });
-          client.search({
+        console.log("Ready?: ", ready);
+        if(ready){
+          this.client.search({
           // undocumented params are appended to the query string
           index: "tourpedia",
           type: "places",

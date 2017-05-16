@@ -1,0 +1,3 @@
+[submodule "elements/number-chart"]
+	path = elements/number-chart
+	url = ssh://git@lab.cluster.gsi.dit.upm.es:2200/sefarad/number-chart.git
