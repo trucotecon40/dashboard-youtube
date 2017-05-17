@@ -1,4 +1,5 @@
-{"name": "dashboard-tourpedia",
+{
+  "name": "dashboard-tourpedia",
   "authors": [
     "gsi-upm"
   ],
@@ -25,11 +26,11 @@
     "elasticsearchjs-import": "DigElements/elasticsearchjs-import#~1.0.0",
     "elasticjs-import": "DigElements/elasticjs-import#~1.0.1",
     "webcomponentsjs": "< 1.0.0"
-
   },
- "resolutions": {
-   "webcomponentsjs": "0.7.24"
- },
- "license": "Apache-2.0",
- "homepage": "https://lab.cluster.gsi.dit.upm.es/sefarad/dashboard-tourpedia"
+  "resolutions": {
+    "webcomponentsjs": "0.7.24",
+    "elastic.js": "^1.2.0"
+  },
+  "license": "Apache-2.0",
+  "homepage": "https://lab.cluster.gsi.dit.upm.es/sefarad/dashboard-tourpedia"
 }
