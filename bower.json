@@ -25,6 +25,7 @@
     "jquery": "jquery#^2.1.4",
     "elasticsearchjs-import": "DigElements/elasticsearchjs-import#~1.0.0",
     "elasticjs-import": "DigElements/elasticjs-import#~1.0.1",
+    "elastic-client": "DigElements/elastic-client#~1.0.1",
     "webcomponentsjs": "< 1.0.0"
   },
   "resolutions": {
