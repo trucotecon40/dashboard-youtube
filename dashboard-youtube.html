@@ -1,0 +1,68 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../material-search/material-search.html">
+<link rel="import" href="../paper-material/paper-material.html">
+<link rel="import" href="../google-chart-elasticsearch/google-chart.html">
+<link rel="import" href="../paper-tabs/paper-tabs.html">
+<link rel="import" href="../reviews-table/reviews-table.html">
+<link rel="import" href="../number-chart/number-chart.html">
+
+
+
+<dom-module id="dashboard-youtube">
+
+  <link rel="import" type="css" href="dashboard-youtube.css">
+
+  <template>
+      <youtube-displayer
+      videoid='{}'
+      finaltime='{}'
+      id="youtube-displayer1"
+      ></youtube-displayer>
+      <sentiment-displayer
+    data='{}'
+    initialtime=''
+    finaltime=''
+    id="sentiment-displayer1"
+      ></sentiment-displayer>
+      <comments-displayer
+    comments='{}'
+    id="comments-displayer1"
+      ></comments-displayer>
+    </template>
+
+
+
+
+  </template>
+
+  <script>
+  var ready = false;
+    Polymer({
+      is: 'dashboard-youtube',
+      properties: {
+              comments: {
+                type: String,
+                value: ''
+              },  
+              finaltime: {
+                type: String,
+                value: ''
+              },
+              initialtime: {
+                type: String,
+                value: ''
+                  
+              },
+              data: {
+                type: Object,
+                value: ''              
+              },
+              videoid: {
+                type: String,
+                value: ''
+              }              
+      }
+    });
+  </script>
+
+</dom-module>

@@ -1,4 +1,4 @@
-`Sefarad dashboard for the tourpedia data.
+`Sefarad dashboard for the YouTube-Sentiment data.
 
 ## Usage
 
@@ -6,13 +6,13 @@ This web component accepts the following parameters:
 
 ```html
 
-<dashboard-tourpedia
+<dashboard-youtube
     client="<!-- elasticsearch client -->">
-</dashboard-tourpedia>
+</dashboard-youtube>
 
 ```
 
-See the `dashboard-tourpedia.html` and `demo/index.html` for more information.
+See the `dashboard-youtube.html` and `demo/index.html` for more information.
 
 ## Installation
 
@@ -20,7 +20,7 @@ This web component is available in bower.
 
 ```bash
 
-$ bower install dashboard-tourpedia
+$ bower install dashboard-youtube
 
 ```
 

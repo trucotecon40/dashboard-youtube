@@ -1,10 +1,10 @@
 {
-  "name": "dashboard-tourpedia",
+  "name": "dashboard-youtube",
   "authors": [
     "gsi-upm"
   ],
-  "description": "Dashboard to visualize data from TourPedia API",
-  "main": "dashboard-tourpedia.html",
+  "description": "Dashboard to visualize data from YouTubeSentiment API",
+  "main": "dashboard-youtube.html",
   "keywords": [
     "dashboard",
     "web-component",
@@ -26,12 +26,25 @@
     "elasticsearchjs-import": "DigElements/elasticsearchjs-import#~1.0.0",
     "elasticjs-import": "DigElements/elasticjs-import#~1.0.1",
     "elastic-client": "DigElements/elastic-client#~1.0.1",
-    "webcomponentsjs": "< 1.0.0"
+    "webcomponentsjs": "< 1.0.0",
+    "youtube-displayer": "*",
+    "comments-displayer": "*",
+    "sentiment-displayer": "*",
+    "d3": "v3.4.13"
   },
   "resolutions": {
     "webcomponentsjs": "0.7.24",
-    "elastic.js": "^1.2.0"
+    "elastic.js": "^1.2.0",
+    "jquery": "^2.1.4"
   },
   "license": "Apache-2.0",
-  "homepage": "https://lab.cluster.gsi.dit.upm.es/sefarad/dashboard-tourpedia"
+  "homepage": "https://lab.cluster.gsi.dit.upm.es/sefarad/dashboard-youtube",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
 }

@@ -1,26 +1,23 @@
 <html>
   <head>
-
+  <script src="../bower_components/d3/d3.min.js"></script>
     <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="imports.html"></link>
-  </head>
-  
+  </head>  
   <body>
     <template is="dom-bind">
+    <dashboard-youtube>
+    </dashboard-youtube>
 
-    <elastic-client 
-      config='{"host": "http://localhost:9200"}' 
-      client="{{client}}"
-      cluster-status="{{myStatus}}">
-    </elastic-client>
-
-    <dashboard-tourpedia
-      client="{{client}}"></dashboard-tourpedia>
-    <!-- <button id="databutton" onclick="changedata()">Click to change data</button> -->
     <script>
-      var datas =[
+       var datac =[
         {"hits": {
-                "total": 20000
+                "data": [
+            { "comment": "Me parece bien", "sentiment": 1 },
+            { "comment": "Estoy de acuerdo", "sentiment": 1 },
+            { "comment": "Dislike", "sentiment": -1 },
+            { "comment": "El aliento de mi gato huele a comida de gato", "sentiment": 1 },
+            { "comment": "Pues se ha quedado una tarde espectacular para pegarse un tiro", "sentiment": -1 }]
             },
             "aggregations": {
                 "category": {
@@ -30,27 +27,73 @@
                     ]
                 }
             }
-        },
+        }];
+      var cd1 = document.getElementById('comments-displayer1');
+      cd1.comments = datac[0].hits.data;
+          var datas =[
         {"hits": {
-                "total": 30000
+                "data": [
+                { "sec": 0, "sentiment": 0},
+                { "sec": 1, "sentiment": 1},
+                { "sec": 2, "sentiment": -1},
+                { "sec": 3, "sentiment": -1},
+                { "sec": 4, "sentiment": 1},  
+                { "sec": 5, "sentiment": 1},
+                { "sec": 6, "sentiment": -1},
+                { "sec": 7, "sentiment": 1},
+                { "sec": 8, "sentiment": 1}, 
+                { "sec": 9, "sentiment": -1},
+                { "sec": 10, "sentiment": 1},
+                { "sec": 11, "sentiment": 1},
+                { "sec": 12, "sentiment": -1},
+                { "sec": 13, "sentiment": -1},
+                { "sec": 14, "sentiment": 1},  
+                { "sec": 15, "sentiment": 1},
+                { "sec": 16, "sentiment": -1},
+                { "sec": 17, "sentiment": 1},
+                { "sec": 18, "sentiment": 1},
+                { "sec": 19, "sentiment": -1},
+                { "sec": 20, "sentiment": 1},  
+                { "sec": 21, "sentiment": 1},
+                { "sec": 22, "sentiment": -1},
+                { "sec": 23, "sentiment": -1},
+                { "sec": 24, "sentiment": 1},  
+                { "sec": 25, "sentiment": 1},
+                { "sec": 26, "sentiment": -1},
+                { "sec": 27, "sentiment": 1},
+                { "sec": 28, "sentiment": 1}],
+                "initialtime": '1',
+                "finaltime": '5'
             },
             "aggregations": {
                 "category": {
                     "buckets": [
-                        {"key": "myObject", "doc_count": 1000},
-                        {"key": "otherObject", "doc_count": 4000}
+                        {"key": "myObject", "doc_count": 3000},
+                        {"key": "otherObject", "doc_count": 1000}
+                    ]
+                }
+            }
+        }];
+      var sd1 = document.getElementById('sentiment-displayer1');
+      sd1.data = datas[0].hits.data;
+      sd1.initialtime = datas[0].hits.initialtime;
+      sd1.finaltime = datas[0].hits.finaltime;
+          var datay =[
+        {"hits": {
+                "videoid": 'vNOllWX-2aE'
+            },
+            "aggregations": {
+                "category": {
+                    "buckets": [
+                        {"key": "myObject", "doc_count": 3000},
+                        {"key": "otherObject", "doc_count": 1000}
                     ]
                 }
             }
         }];
       var numdata = 0;
-      <!-- var nc1 = document.getElementById('demo-chart1'); -->
-      <!-- var nc2 = document.getElementById('demo-chart2'); -->
-      <!-- nc1.data = nc2.data = datas[0]; -->
-      <!-- function changedata(){ -->
-      <!--   numdata += 1; -->
-      <!-- nc1.data = nc2.data = datas[numdata%2]; -->
-      <!-- } -->
+      var yd1 = document.getElementById('youtube-displayer1');
+      yd1.videoid = datay[0].hits.videoid;      
     </script>
     </template>
   </body>

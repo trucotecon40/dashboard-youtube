@@ -1,5 +1,5 @@
 #!/bin/sh
-curl -XPUT http://localhost:9200/tourpedia/_mapping/places -d '
+curl -XPUT http://localhost:9200/youtube/_mapping/places -d '
 {
   "properties": {
     "location": { 
