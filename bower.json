@@ -39,7 +39,7 @@
   },
   "license": "Apache-2.0",
   "homepage": "https://lab.cluster.gsi.dit.upm.es/sefarad/dashboard-youtube",
-  "private": true,
+  "private": false,
   "ignore": [
     "**/.*",
     "node_modules",
