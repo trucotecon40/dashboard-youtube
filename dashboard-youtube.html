@@ -52,9 +52,13 @@
               },
               initialtime: {
                 type: String,
-                value: ''
-                  
+                value: ''                  
               },
+              client: {
+                type: Object,
+                notify: true,
+                observer: '_clientChanged'              
+              },              
               data: {
                 type: Object,
                 value: ''              
