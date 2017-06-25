@@ -63,6 +63,48 @@
                 type: String,
                 value: ''
               }              
+      },
+
+      _clientChanged: function() {
+        console.log("ClientChanged");
+        ready = true;
+        this._query();
+      },
+      _filtersChange: function() {
+        this._query();
+       },
+       _query: function() {
+        console.log("_filtersChangedash")
+        var that = this;
+        console.log("Ready?: ", ready);
+        if(ready){
+          this.client.search({
+          // undocumented params are appended to the query string
+          index: "youtube",
+          type: "comment",
+          body: {
+            size: 10,
+            aggs: {
+              comments: {
+                terms: {
+                  field: "comment.keyword",
+                  order: {
+                    _count: "desc"
+                  }
+                }
+              }
+            }      
+          }
+          }).then(function (resp) {
+            var myids = []
+            resp.hits.hits.forEach(function(entry){myids.push(entry._id)})
+            that.ids = myids;
+            //console.log(that.ids)
+            that.data = resp;
+            //console.log(that.data)
+            
+            });
+        }
       }
     });
   </script>
