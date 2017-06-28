@@ -27,7 +27,7 @@
     id="sentiment-displayer1"
       ></sentiment-displayer>
       <comments-displayer
-    comments='{}'
+    comments="{{comments}}"
     id="comments-displayer1"
       ></comments-displayer>
     </template>
@@ -43,7 +43,7 @@
       is: 'dashboard-youtube',
       properties: {
               comments: {
-                type: String,
+                type: Object,
                 value: ''
               },  
               finaltime: {
@@ -66,7 +66,16 @@
               videoid: {
                 type: String,
                 value: ''
-              }              
+              },
+                      fields: {
+          type: Array,
+          value: function() { return []; }
+        },
+              filters: {
+          type: Array,
+          notify: true,
+          value: function() { return []; }
+        }          
       },
 
       _clientChanged: function() {
@@ -77,6 +86,9 @@
       _filtersChange: function() {
         this._query();
        },
+       getComments: function() {
+              return this.comments;
+            },
        _query: function() {
         console.log("_filtersChangedash")
         var that = this;
@@ -85,7 +97,7 @@
           this.client.search({
           // undocumented params are appended to the query string
           index: "youtube",
-          type: "comment",
+          type: "places",
           body: {
             size: 10,
             aggs: {
@@ -103,9 +115,9 @@
             var myids = []
             resp.hits.hits.forEach(function(entry){myids.push(entry._id)})
             that.ids = myids;
-            //console.log(that.ids)
-            that.data = resp;
-            //console.log(that.data)
+            console.log(that.ids)
+            that.comments = resp.hits.hits;
+            console.log(that.comments)
             
             });
         }
