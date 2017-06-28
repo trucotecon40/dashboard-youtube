@@ -16,12 +16,12 @@
 
   <template>
       <youtube-displayer
-      videoid='{}'
+      videoid='{{videoid}}'
       finaltime='{}'
       id="youtube-displayer1"
       ></youtube-displayer>
       <sentiment-displayer
-    data='{}'
+    data='{{data}}'
     initialtime=''
     finaltime=''
     id="sentiment-displayer1"
@@ -97,7 +97,7 @@
           this.client.search({
           // undocumented params are appended to the query string
           index: "youtube",
-          type: "places",
+          type: "data",
           body: {
             size: 10,
             aggs: {
@@ -108,16 +108,34 @@
                     _count: "desc"
                   }
                 }
-              }
+              },
+              videoid: {
+                terms: {
+                  field: "videoid.keyword",
+                  order: {
+                    _count: "desc"
+                  }
+                }
+              },
+              data: {
+                terms: {
+                  field: "data.keyword",
+                  order: {
+                    _count: "desc"
+                  }
+                }
+              }                            
             }      
           }
           }).then(function (resp) {
             var myids = []
             resp.hits.hits.forEach(function(entry){myids.push(entry._id)})
             that.ids = myids;
-            console.log(that.ids)
+           // console.log(that.ids);
             that.comments = resp.hits.hits;
-            console.log(that.comments)
+            that.data = resp.hits.hits;
+            that.videoid = resp.hits.hits[0]._source.videoid;
+           // console.log(that.videoid);
             
             });
         }
