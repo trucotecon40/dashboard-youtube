@@ -1,15 +1,74 @@
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../material-search/material-search.html">
-<link rel="import" href="../paper-material/paper-material.html">
-<link rel="import" href="../google-chart-elasticsearch/google-chart.html">
-<link rel="import" href="../paper-tabs/paper-tabs.html">
-<link rel="import" href="../elastic-client/elastic-client.html">
-<link rel="import" href="../dashboard-youtube/dashboard-youtube.html">
-<link rel="import" href="../youtube-displayer/youtube-displayer.html">
-<link rel="import" href="../comments-displayer/comments-displayer.html">
-<link rel="import" href="../sentiment-displayer/sentiment-displayer.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/material-search/material-search.html">
+<link rel="import" href="../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../bower_components/google-chart-elasticsearch/google-chart.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/elastic-client/elastic-client.html">
+<link rel="import" href="../bower_components/dashboard-youtube/dashboard-youtube.html">
+<link rel="import" href="../bower_components/youtube-displayer/youtube-displayer.html">
+<link rel="import" href="../bower_components/comments-displayer/comments-displayer.html">
+<link rel="import" href="../bower_components/sentiment-displayer/sentiment-displayer.html">
 
-
+<style type="text/css">
+    youtube-displayer .container{
+      width: 100% !important;
+    }
+    html5-video-player{
+      border-radius: 20px;
+    }
+    iframe{ 
+      border-radius: 20px;
+      margin: 0 auto !important;
+      height: 40vh;
+      width: 60vw;
+      max-width: 626px !important;
+      max-height: 396px !important;
+    }
+    #time1{
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-left: 40vw;
+    }
+    button{
+    border-radius: 20px;
+    }
+    #time2{
+    border-radius: 20px;
+    }
+    #sentiment-displayer1 #content {
+    margin: 0 auto !important;
+    }
+    table tbody{
+      border: none;
+    }
+    table tbody tr{
+      border: none;
+    }
+    table tbody tr td{
+      border:none;
+      border-bottom: 1px solid black !important;
+    }
+    table tbody tr th{
+      border: none;
+      font-size: 1.3em;
+      border-bottom: 2px solid black !important;
+    }
+    table{
+      border-radius: 20px 20px 0px 0px;
+    }
+    path{
+      stroke: white !important;
+    }
+    html{
+          background-color: #a7d5cd;
+    }
+    #negativeTable{
+      background-color: #de826b !important;
+    }
+    #positiveTable{
+      background-color: #68b5d1;
+    }
+</style>
 <dom-module id="dashboard-youtube">
 
   <link rel="import" type="css" href="dashboard-youtube.css">
@@ -96,10 +155,10 @@
         if(ready){
           this.client.search({
           // undocumented params are appended to the query string
-          index: "youtube",
-          type: "data",
+          index: "test4",
+          type: "test4docs",
           body: {
-            size: 10,
+            size: 100,
             aggs: {
               comments: {
                 terms: {
@@ -131,10 +190,11 @@
             var myids = []
             resp.hits.hits.forEach(function(entry){myids.push(entry._id)})
             that.ids = myids;
-           // console.log(that.ids);
-            that.comments = resp.hits.hits;
-            that.data = resp.hits.hits;
-            that.videoid = resp.hits.hits[0]._source.videoid;
+            
+            that.comments = resp.hits.hits[50]._source.comments;
+            that.data = resp.hits.hits[50]._source.subtitles;
+            console.log(resp);
+            that.videoid = resp.hits.hits[0]._source.videoId[0];
            // console.log(that.videoid);
             
             });
