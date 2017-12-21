@@ -39,6 +39,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Polymer Starter Kit">
   <link rel="apple-touch-icon" href="/images/touch/apple-touch-icon.png">
+    <link rel="import" href="../dashboard-youtube.html">
 
   <!-- D3.js for drawing charts -->
   <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
@@ -49,12 +50,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <meta name="msapplication-TileImage" content="/images/touch/ms-touch-icon-144x144-precomposed.png">
 
   <!-- build:css styles/main.css -->
-  <link rel="stylesheet" href="/styles/main.css">
+
   <!-- endbuild-->
 
   <!-- ------------------------------- STYLE LINKS ZONE -------------------------------------- -->
 
-  <link href='/styles/yasr.min.css' rel='stylesheet' type='text/css'/>
+  
   <link href='//cdn.jsdelivr.net/yasqe/2.6.2/yasqe.min.css' rel='stylesheet' type='text/css'/>
 
   <!-- ------------------------------- end/ STYLE LINKS ZONE --------------------------------- -->
@@ -64,7 +65,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <!-- endbuild -->
 
   <!-- will be replaced with elements/elements.vulcanized.html -->
-  <link rel="import" href="/elements/elements.html">
+  
   <!-- endreplace-->
 
 </head>
@@ -81,25 +82,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       <!-- Main Area -->
       <paper-scroll-header-panel main condenses keep-condensed-header>
-
-        <!-- Main Toolbar -->
-        <paper-toolbar id="mainToolbar" class="tall">
-          <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
-          <span class="flex"></span>
-
-          <!-- Toolbar icons -->
-
-          <!-- Application name -->
-          <div class="middle middle-container center horizontal layout" style="margin-left: 0">
-            <div class="app-name"><img src="/images/Sefarad__Banner_Bonus.jpg" style="width: 400px;"></div></div>
-          </div>
-
-          <!-- Application sub title -->
-          <div class="bottom bottom-container center horizontal layout">
-          </div>
-
-        </paper-toolbar>
-
         <!-- Main Content -->
         <div class="content">
           <iron-pages attr-for-selected="data-route" selected="home">
@@ -119,7 +101,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                  duration="6000"
                  text="Caching complete! This app will work offline.">
     </paper-toast>
-
     <platinum-sw-register auto-register
                           clients-claim
                           skip-waiting
@@ -133,14 +114,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
 
   <!-- build:js scripts/app.js -->
-  <script src="/scripts/app.js"></script>
-  <script src="/scripts/jquery-2.1.4.min.js"></script>
-  <!-- endbuild-->
-  <!-- build:js scripts/elasticsearch.js -->
-  <script src="/scripts/elasticsearch.jquery.js"></script>
-  <!-- endbuild-->
-  <script src="/scripts/es.js"></script>
-  <script src="/scripts/chernoff.js"></script>
+
   <script src='//cdn.jsdelivr.net/yasqe/2.6.2/yasqe.bundled.min.js'></script>
   <script src='//cdn.jsdelivr.net/yasr/2.6.1/yasr.bundled.min.js'></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
