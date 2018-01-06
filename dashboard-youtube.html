@@ -27,7 +27,6 @@
     #time1{
     border-radius: 20px;
     margin-top: 20px;
-    margin-left: 40vw;
     }
     button{
     border-radius: 20px;
@@ -56,12 +55,7 @@
     table{
       border-radius: 20px 20px 0px 0px;
     }
-    path{
-      stroke: white !important;
-    }
-    html{
-          background-color: #a7d5cd;
-    }
+
     #negativeTable{
       background-color: #de826b !important;
     }
@@ -156,7 +150,7 @@
           this.client.search({
           // undocumented params are appended to the query string
           index: "finalindex",
-          type: "finaltype",
+          type: "hate",
           body: {
             size: 100,
             aggs: {
