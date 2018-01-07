@@ -10,14 +10,19 @@
 <link rel="import" href="../bower_components/sentiment-displayer/sentiment-displayer.html">
 
 <style type="text/css">
+    #data-analysis{
+      width: 100%;
+      display:inline-flex;
+      justify-content: space-evenly;
+    }
+    #widget-place{
+      width:100%;
+      padding: 10px;
+    }
     youtube-displayer .container{
       width: 100% !important;
     }
-    html5-video-player{
-      border-radius: 20px;
-    }
     iframe{ 
-      border-radius: 20px;
       margin: 0 auto !important;
       height: 40vh;
       width: 60vw;
@@ -33,6 +38,9 @@
     }
     #time2{
     border-radius: 20px;
+    }
+    sentiment-displayer {
+      margin-top: 5px;
     }
     #sentiment-displayer1 #content {
     margin: 0 auto !important;
@@ -57,38 +65,58 @@
     }
 
     #negativeTable{
-      background-color: #de826b !important;
+      background-color: rgba(255, 82, 82, .2) !important;
     }
     #positiveTable{
-      background-color: #68b5d1;
+      background-color: rgba(153, 204, 255, 0.53) !important;
+    }
+    #header{
+    /*  height: 140px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      font-size: 6em;
+      font-weight: bold;
+      background-color: #1275c2;
+      color: white;
+      text-align: center;
+      */
     }
 </style>
 <dom-module id="dashboard-youtube">
 
   <link rel="import" type="css" href="dashboard-youtube.css">
 
-  <template>
-      <youtube-displayer
-      videoid='{{videoid}}'
-      finaltime='{}'
-      id="youtube-displayer1"
-      ></youtube-displayer>
-      <sentiment-displayer
-    data='{{data}}'
-    initialtime=''
-    finaltime=''
-    id="sentiment-displayer1"
-      ></sentiment-displayer>
-      <comments-displayer
-    comments="{{comments}}"
-    id="comments-displayer1"
-      ></comments-displayer>
+  <template is="dom-bind">
+  <div id="dashboard-wrapper">
+    <div id="header">
+      
+    </div>
+    <div id="widget-place">
+        <youtube-displayer
+        videoid='{{videoid}}'
+        playing='{{playing}}'
+        id="youtube-displayer1"
+        ></youtube-displayer>
+    </div>
+    <br>
+    <div id="data-analysis">
+      <div id="widget-place">
+          <sentiment-displayer
+        data='{{data}}'
+        initialtime=''
+        playing='{{playing}}'
+        id="sentiment-displayer1"
+          ></sentiment-displayer>
+      </div>
+      <div id="widget-place">
+          <comments-displayer
+        comments="{{comments}}"
+        id="comments-displayer1"
+          ></comments-displayer>
+      </div>
+    </div>
+  </div>
     </template>
-
-
-
-
-  </template>
 
   <script>
   var ready = false;
@@ -99,9 +127,10 @@
                 type: Object,
                 value: ''
               },  
-              finaltime: {
+              playing: {
                 type: String,
-                value: ''
+                value: '{{playing}}',
+                observer: '_dataChanged'              
               },
               initialtime: {
                 type: String,
@@ -130,7 +159,15 @@
           value: function() { return []; }
         }          
       },
+      _dataChanged: function() {
+              console.log("data has changed")
+              if(this.playing == undefined){
+                console.log("No data");
+                return;
+              }
+              console.log(this.playing);
 
+            },
       _clientChanged: function() {
         console.log("ClientChanged");
         ready = true;
