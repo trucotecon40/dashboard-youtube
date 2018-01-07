@@ -12,10 +12,14 @@
     "polymer"
   ],
   "dependencies": {
+    "iron-checked-element-behavior": "PolymerElements/iron-checked-element-behavior#^1.0.0",
+    "paper-fab-transitions": "^0.1.0",
+    "paper-fab": "PolymerElements/paper-fab#^1.0.0",
+    "web-animations-js": "web-animations/web-animations-js#2.2.2",
+    "paper-card": "PolymerElements/paper-card#^1.1.4",
     "material-search": "material-search#*",
     "leaflet-maps": "leaflet-maps#*",
     "paper-tabs": "paper-tabs#*",
-    "reviews-table": "reviews-table#*",
     "number-chart": "number-chart#^1.1.1",
     "google-apis": "GoogleWebComponents/google-apis#^1.0.0",
     "google-chart-elasticsearch": "google-chart-elasticsearch#^1.1.1",
@@ -27,15 +31,16 @@
     "elasticjs-import": "DigElements/elasticjs-import#~1.0.1",
     "elastic-client": "DigElements/elastic-client#~1.0.1",
     "webcomponentsjs": "< 1.0.0",
-    "youtube-displayer": "*",
-    "comments-displayer": "*",
-    "sentiment-displayer": "*",
+    "youtube-displayer": "3.3",
+    "comments-displayer": "4.3",
+    "sentiment-displayer": "4.5",
     "d3": "v3.4.13"
   },
   "resolutions": {
     "webcomponentsjs": "0.7.24",
     "elastic.js": "^1.2.0",
-    "jquery": "^2.1.4"
+    "jquery": "^2.2.4",
+    "sentiment-displayer": "3.0.0"
   },
   "license": "Apache-2.0",
   "homepage": "https://lab.cluster.gsi.dit.upm.es/sefarad/dashboard-youtube",
@@ -43,7 +48,6 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
     "test",
     "tests"
   ]
