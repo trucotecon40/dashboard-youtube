@@ -10,67 +10,67 @@
 <link rel="import" href="../bower_components/sentiment-displayer/sentiment-displayer.html">
 
 <style type="text/css">
-    #data-analysis{
-      width: 100%;
-      display:inline-flex;
-      justify-content: space-evenly;
-    }
-    #widget-place{
-      width:100%;
-      padding: 10px;
-    }
-    youtube-displayer .container{
-      width: 100% !important;
-    }
-    iframe{ 
-      margin: 0 auto !important;
-      height: 40vh;
-      width: 60vw;
-      max-width: 626px !important;
-      max-height: 396px !important;
-    }
-    #time1{
+  #data-analysis{
+    width: 100%;
+    display:inline-flex;
+    justify-content: space-evenly;
+  }
+  #widget-place{
+    width:100%;
+    padding: 10px;
+  }
+  youtube-displayer .container{
+    width: 100% !important;
+  }
+  iframe{ 
+    margin: 0 auto !important;
+    height: 40vh;
+    width: 60vw;
+    max-width: 626px !important;
+    max-height: 396px !important;
+  }
+  #time1{
     border-radius: 20px;
     margin-top: 20px;
-    }
-    button{
+  }
+  button{
     border-radius: 20px;
-    }
-    #time2{
+  }
+  #time2{
     border-radius: 20px;
-    }
-    sentiment-displayer {
-      margin-top: 5px;
-    }
-    #sentiment-displayer1 #content {
+  }
+  sentiment-displayer {
+    margin-top: 5px;
+  }
+  #sentiment-displayer1 #content {
     margin: 0 auto !important;
-    }
-    table tbody{
-      border: none;
-    }
-    table tbody tr{
-      border: none;
-    }
-    table tbody tr td{
-      border:none;
-      border-bottom: 1px solid black !important;
-    }
-    table tbody tr th{
-      border: none;
-      font-size: 1.3em;
-      border-bottom: 2px solid black !important;
-    }
-    table{
-      border-radius: 20px 20px 0px 0px;
-    }
+  }
+  table tbody{
+    border: none;
+  }
+  table tbody tr{
+    border: none;
+  }
+  table tbody tr td{
+    border:none;
+    border-bottom: 1px solid black !important;
+  }
+  table tbody tr th{
+    border: none;
+    font-size: 1.3em;
+    border-bottom: 2px solid black !important;
+  }
+  table{
+    border-radius: 20px 20px 0px 0px;
+  }
 
-    #negativeTable{
-      background-color: rgba(255, 82, 82, .2) !important;
-    }
-    #positiveTable{
-      background-color: rgba(153, 204, 255, 0.53) !important;
-    }
-    #header{
+  #negativeTable{
+    background-color: rgba(255, 82, 82, .2) !important;
+  }
+  #positiveTable{
+    background-color: rgba(153, 204, 255, 0.53) !important;
+  }
+  #header{
     /*  height: 140px;
       padding-top: 20px;
       padding-bottom: 20px;
@@ -81,125 +81,124 @@
       text-align: center;
       */
     }
-</style>
-<dom-module id="dashboard-youtube">
+  </style>
+  <dom-module id="dashboard-youtube">
 
-  <link rel="import" type="css" href="dashboard-youtube.css">
+    <link rel="import" type="css" href="dashboard-youtube.css">
 
-  <template is="dom-bind">
-  <div id="dashboard-wrapper">
-    <div id="header">
-      
-    </div>
-    <div id="widget-place">
-        <youtube-displayer
-        videoid='{{videoid}}'
-        playing='{{playing}}'
-        player='{{player}}'
-        secs='{{secs}}'
-        initialtime='{{initialtime}}'
-        id="youtube-displayer1"
-        ></youtube-displayer>
-    </div>
-    <br>
-    <div id="data-analysis">
-      <div id="widget-place">
-          <sentiment-displayer
-        data='{{data}}'
-        secs='{{secs}}'
-        initialtime='{{initialtime}}'
-        playing='{{playing}}'
-        id="sentiment-displayer1"
-          ></sentiment-displayer>
+    <template is="dom-bind">
+      <div id="dashboard-wrapper">
+        <div id="header">
+          
+        </div>
+        <div id="widget-place">
+          <youtube-displayer
+          videoid='{{videoid}}'
+          playing='{{playing}}'
+          player='{{player}}'
+          secs='{{secs}}'
+          initialtime='{{initialtime}}'
+          id="youtube-displayer1"
+          ></youtube-displayer>
+        </div>
+        <br>
+        <div id="data-analysis">
+          <div id="widget-place">
+            <sentiment-displayer
+            data='{{data}}'
+            secs='{{secs}}'
+            initialtime='{{initialtime}}'
+            playing='{{playing}}'
+            id="sentiment-displayer1"
+            ></sentiment-displayer>
+          </div>
+          <div id="widget-place">
+            <comments-displayer
+            comments="{{comments}}"
+            id="comments-displayer1"
+            ></comments-displayer>
+          </div>
+        </div>
       </div>
-      <div id="widget-place">
-          <comments-displayer
-        comments="{{comments}}"
-        id="comments-displayer1"
-          ></comments-displayer>
-      </div>
-    </div>
-  </div>
     </template>
 
-  <script>
-  var ready = false;
-    Polymer({
-      is: 'dashboard-youtube',
-      properties: {
-              comments: {
-                type: Object,
-                value: ''
-              },  
-              playing: {
-                type: String,
-                value: '{{playing}}',
-                observer: '_dataChanged'              
-              },
-              initialtime: {
-                type: String,
-                value: '{{initialtime}}'                  
-              },
-              secs: {
-                type: String,
-                value: '{{secs}}',
-                observer: '_filtersChange'
-                            
-              },
-              client: {
-                type: Object,
-                notify: true,
-                observer: '_clientChanged'              
-              },              
-              data: {
-                type: Object,
-                value: ''              
-              },
-              player: {
-                type: Object,
-                value: ''              
-              },
-              videoid: {
-                type: String,
-                value: ''
-              },
-                      fields: {
-          type: Array,
-          value: function() { return []; }
+    <script>
+      var ready = false;
+      Polymer({
+        is: 'dashboard-youtube',
+        properties: {
+          comments: {
+            type: Object,
+            value: ''
+          },  
+          playing: {
+            type: String,
+            value: '{{playing}}',
+            observer: '_dataChanged'              
+          },
+          initialtime: {
+            type: String,
+            value: '{{initialtime}}'                  
+          },
+          secs: {
+            type: String,
+            value: '{{secs}}',
+            observer: '_filtersChange'
+            
+          },
+          client: {
+            type: Object,
+            notify: true,
+            observer: '_clientChanged'              
+          },              
+          data: {
+            type: Object,
+            value: ''              
+          },
+          player: {
+            type: Object,
+            value: ''              
+          },
+          videoid: {
+            type: String,
+            value: ''
+          },
+          fields: {
+            type: Array,
+            value: function() { return []; }
+          },
+          filters: {
+            type: Array,
+            notify: true,
+            value: function() { return []; }
+          }          
         },
-              filters: {
-          type: Array,
-          notify: true,
-          value: function() { return []; }
-        }          
-      },
-      _dataChanged: function() {
-              console.log("data has changed")
-              if(this.playing == undefined){
-                console.log("No data");
-                return;
-              }
-              console.log(this.secs);
-              console.log(this.playing);
+        _dataChanged: function() {
 
-            },
-      _clientChanged: function() {
-        console.log("ClientChanged");
-        ready = true;
-        this._query();
-      },
-      _filtersChange: function() {
-        console.log(this.secs);
-       },
-       getComments: function() {
-              return this.comments;
-            },
-       _query: function() {
-        console.log("_filtersChangedash")
-        var that = this;
-        console.log("Ready?: ", ready);
-        if(ready){
-          this.client.search({
+          if(this.playing == undefined){
+
+            return;
+          }
+
+
+        },
+        _clientChanged: function() {
+
+          ready = true;
+          this._query();
+        },
+        _filtersChange: function() {
+
+        },
+        getComments: function() {
+          return this.comments;
+        },
+        _query: function() {
+
+          var that = this;
+
+          if(ready){
+            this.client.search({
           // undocumented params are appended to the query string
           index: "finalindex",
           type: "lastType",
@@ -232,21 +231,21 @@
               }                            
             }      
           }
-          }).then(function (resp) {
-            var myids = []
-            resp.hits.hits.forEach(function(entry){myids.push(entry._id)})
-            that.ids = myids;
-            
-            that.comments = resp.hits.hits[0]._source.comments;
-            that.data = resp.hits.hits[0]._source.subtitles;
-            console.log(resp);
-            that.videoid = resp.hits.hits[0]._source.videoId;
-           // console.log(that.videoid);
-            
-            });
-        }
+        }).then(function (resp) {
+          var myids = []
+          resp.hits.hits.forEach(function(entry){myids.push(entry._id)})
+          that.ids = myids;
+          
+          that.comments = resp.hits.hits[0]._source.comments;
+          that.data = resp.hits.hits[0]._source.subtitles;
+
+          that.videoid = resp.hits.hits[0]._source.videoId;
+
+          
+        });
       }
-    });
-  </script>
+    }
+  });
+</script>
 
 </dom-module>
