@@ -31,9 +31,9 @@
     "elasticjs-import": "DigElements/elasticjs-import#~1.0.1",
     "elastic-client": "DigElements/elastic-client#~1.0.1",
     "webcomponentsjs": "< 1.0.0",
-    "youtube-displayer": "5.0",
-    "comments-displayer": "5.0",
-    "sentiment-displayer": "5.0",
+    "youtube-displayer": "10.0",
+    "comments-displayer": "10.0",
+    "sentiment-displayer": "10.0",
     "d3": "v3.4.13"
   },
   "resolutions": {
