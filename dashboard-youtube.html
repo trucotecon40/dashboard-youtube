@@ -95,6 +95,8 @@
         <youtube-displayer
         videoid='{{videoid}}'
         playing='{{playing}}'
+        player='{{player}}'
+        secs='{{secs}}'
         initialtime='{{initialtime}}'
         id="youtube-displayer1"
         ></youtube-displayer>
@@ -104,6 +106,7 @@
       <div id="widget-place">
           <sentiment-displayer
         data='{{data}}'
+        secs='{{secs}}'
         initialtime='{{initialtime}}'
         playing='{{playing}}'
         id="sentiment-displayer1"
@@ -135,7 +138,13 @@
               },
               initialtime: {
                 type: String,
-                value: ''                  
+                value: '{{initialtime}}'                  
+              },
+              secs: {
+                type: String,
+                value: '{{secs}}',
+                observer: '_filtersChange'
+                            
               },
               client: {
                 type: Object,
@@ -143,6 +152,10 @@
                 observer: '_clientChanged'              
               },              
               data: {
+                type: Object,
+                value: ''              
+              },
+              player: {
                 type: Object,
                 value: ''              
               },
@@ -166,6 +179,7 @@
                 console.log("No data");
                 return;
               }
+              console.log(this.secs);
               console.log(this.playing);
 
             },
@@ -175,7 +189,7 @@
         this._query();
       },
       _filtersChange: function() {
-        this._query();
+        console.log(this.secs);
        },
        getComments: function() {
               return this.comments;
@@ -188,7 +202,7 @@
           this.client.search({
           // undocumented params are appended to the query string
           index: "finalindex",
-          type: "hate",
+          type: "lastType",
           body: {
             size: 100,
             aggs: {
